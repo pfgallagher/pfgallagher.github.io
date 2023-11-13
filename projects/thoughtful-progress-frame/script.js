@@ -23,10 +23,15 @@ const applyOverlay = () => {
 
 const drawImage = img => {
 	const canvas = document.getElementById("canvas");
-	canvas.width = img.width;
-	canvas.height = img.height;
+	const size = Math.max(img.width, img.height);
+	canvas.width = size;
+	canvas.height = size;
 	const ctx = canvas.getContext("2d");
-	ctx.drawImage(img, 0, 0);
+	ctx.fillStyle = "white";
+	ctx.fillRect(0, 0, size, size);
+	const startX = (size - img.width) / 2;
+	const startY = (size - img.height) / 2;
+	ctx.drawImage(img, startX, startY);
 };
 
 const drawOverlay = overlayImage => {
